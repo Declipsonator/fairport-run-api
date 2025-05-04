@@ -1,12 +1,11 @@
 import datetime
-import os
 import pathlib
 
 import requests
 import json
 
-import purdy
-from performanceutils import format_time, event_to_dist
+from fairport_run.purdy import Purdy
+from fairport_run.utils import format_time, event_to_dist
 
 class YenData(object):
 
@@ -110,9 +109,9 @@ class YenData(object):
             converted_from = None
             for event in self.athletes[athlete_id]["performances"].keys():
                 if event in event_from:
-                    conversion = (purdy.Purdy(event_to_dist(event),
-                                             format_time(self.athletes[athlete_id]["performances"][event]["performance"]))
-                                            .convert(event_to_dist(event_to)))
+                    conversion = (Purdy(event_to_dist(event),
+                                              format_time(self.athletes[athlete_id]["performances"][event]["performance"]))
+                                  .convert(event_to_dist(event_to)))
                     if conversion < lowest_time or lowest_time == -1:
                         lowest_time = conversion
                         converted_from = event
@@ -136,14 +135,14 @@ class YenData(object):
         self.add_converted_event('800m', '600m', '1000m')
         self.add_converted_event('1200m', '1000m', '1600m')
         self.add_converted_event('1600m', '1500m')
-        self.add_converted_event('1609.3m', '1600m', '1500m')
+        self.add_converted_event('1609.34m', '1600m', '1500m')
 
 
 
     def add_outdoor_conversions(self):
         self.add_converted_event('1200m', '1600m')
         self.add_converted_event('1600m', '1500m')
-        self.add_converted_event('1609.3m', '1600m', '1500m')
+        self.add_converted_event('1609.34m', '1600m', '1500m')
 
 
     def save_athletes(self, path=None):

@@ -238,5 +238,5 @@ class Purdy(object):
 
         # Invert: target_score = a_factor * (adjusted_time / t_sec - b_parameter)
         # => t_sec = adjusted_time / ((target_score / a_factor) + b_parameter)
-        return adjusted_time / ((score / a_factor) + b_parameter)
+        return round(adjusted_time / ((score / a_factor) + b_parameter), 2)
 

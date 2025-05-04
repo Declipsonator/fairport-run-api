@@ -1,4 +1,6 @@
+import os
 from datetime import datetime
+import time
 
 def format_time(time):
     """Formats floats into time strings and time strings into floats.
@@ -64,4 +66,25 @@ def get_current_year():
     year = now.year
 
     return year if month < 11 else year + 1
+
+def get_file_age(file_path):
+    """
+    Calculates the age of a file in seconds.
+
+    Args:
+      file_path: The path to the file.
+
+    Returns:
+      The age of the file in seconds, or None if the file does not exist.
+    """
+    if not os.path.exists(file_path):
+        return None
+
+    # Get the file's modification timestamp
+    modification_timestamp = os.path.getmtime(file_path)
+
+    # Calculate the file age by subtracting the modification timestamp from the current timestamp
+    file_age = time.time() - modification_timestamp
+    return file_age
+
 
