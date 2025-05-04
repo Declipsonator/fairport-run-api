@@ -1,3 +1,4 @@
+from datetime import datetime
 
 def format_time(time):
     """Formats floats into time strings and time strings into floats.
@@ -41,3 +42,26 @@ def event_to_dist(event_name):
             nums += char
 
     return float(nums)
+
+def get_current_season():
+    """Returns the current season.
+
+    Returns:
+        str: 'indoor' or 'outdoor'.
+    """
+    month = datetime.now().month
+
+    return 'indoor' if month < 4 or month > 10 else 'outdoor'
+
+def get_current_year():
+    """Returns the current year.
+
+    Returns:
+        int: Current year.
+    """
+    now = datetime.now()
+    month = now.month
+    year = now.year
+
+    return year if month < 11 else year + 1
+
