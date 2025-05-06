@@ -43,7 +43,7 @@ class Relay(object):
 
         # Additional check: make sure all legs_lists are non-empty
         if any(len(leg_list) == 0 for leg_list in legs_lists):
-            return []
+            self.relays = []
 
         event_groups = {
             ev: [i for i, e in enumerate(self.events) if e == ev]
@@ -92,5 +92,6 @@ class Relay(object):
                     heapq.heappush(heap, (new_total, new_idx))
 
         self.relays = results
+
 
 

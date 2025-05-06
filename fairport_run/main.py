@@ -13,13 +13,9 @@ from fairport_run.yendata import YenData
 
 app = FastAPI()
 
-class Season(str, Enum):
-    outdoor = 'outdoor'
-    indoor = 'indoor'
-
 class RelayRequest(BaseModel):
     year: int
-    season: Season
+    season: str
     legs: List[str]  # or List[float] or whatever type legs actually are
 
 @app.get("/")
@@ -27,12 +23,12 @@ def read_root():
     return {"Info": "This is the root directory of the Fairport.run API. View /docs for more information."}
 
 @app.get("/athletes/{year}/{season}")
-def read_athletes(year: int, season: Season):
+def read_athletes(year: int, season: str):
     """## Returns a list of athletes and their top performance in each event
 
     Args:\n
         year (int): The year of the season\n
-        season (int): The season of track
+        season (str): The season of track
     """
 
     if os.path.exists(f'{season}/{year}.json'):
@@ -58,7 +54,7 @@ def relays(request: RelayRequest):
 
     Args:\n
         year (int): The year of the season
-        season (int): The season of track
+        season (str): The season of track
         legs (tuple): The legs of the race
     """
 
