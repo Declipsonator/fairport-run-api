@@ -147,7 +147,7 @@ class YenData(object):
 
     def save_athletes(self, path=None):
         if not path:
-            path = f'{self.season}/{self.year}.json'
+            path = f'{self.season}/{self.gender}/{self.year}.json'
 
         path = pathlib.Path(path)
         path.parent.mkdir(parents=True, exist_ok=True)
