@@ -5,6 +5,7 @@ from enum import Enum
 from typing import List
 
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from fairport_run.relays import Relay
@@ -12,6 +13,20 @@ from fairport_run.utils import get_current_season, get_current_year, get_file_ag
 from fairport_run.yendata import YenData
 
 app = FastAPI()
+
+origins = [
+    "https://alpha.fairport.run",
+    "https://fairport.run",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # use ["*"] for public APIs (not recommended for private APIs)
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 class RelayRequest(BaseModel):
     year: int
